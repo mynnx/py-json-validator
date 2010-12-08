@@ -12,7 +12,7 @@ def rexp(expr):
     '''
     def match(value):
         if not re.match(expr, value):
-            raise ValidationError('String %s does not match the format %s' 
+            raise ValidationError('String '%s' does not match the format %s' 
                 % (value, expr))
     return match
 
@@ -25,7 +25,7 @@ def enum(*values):
     def inEnum(value):
         if value not in values:
             valuesStr = ','.join([str(v) for v in values])
-            raise ValidationError('Value %s must be one of (%s)' 
+            raise ValidationError('Value '%s' must be one of (%s)' 
                 % (value, valuesStr))
     return inEnum
 
@@ -34,7 +34,7 @@ def _checkType(value, type):
     Raises a ValidationError if value is not an instance of the provided type.
     '''
     if not isinstance(value, type):
-        raise ValidationError('Value %s is not of type %s' 
+        raise ValidationError('Value '%s' is not of type %s' 
             % (value, type.__name__))
 
 def _validateValue(value, schema):
@@ -52,7 +52,7 @@ def validate_json(json_data, schema):
         data = json.loads(json_data)
     except ValueError, exc:
         raise ValidationError('Could not parse JSON: %s' % exc)
-    validate(data, schema)
+    return validate(data, schema)
         
 def validate(data, schema):
     '''
@@ -72,7 +72,7 @@ def validate(data, schema):
         required = False if k[-1] == '?' else True
         dataK = k if required else k[:-1]
         if required and dataK not in data:
-            raise ValidationError('Required key %s not found' % k)
+            raise ValidationError("Required key '%s' not found" % k)
         elif dataK not in data:
             continue
 
@@ -84,9 +84,10 @@ def validate(data, schema):
             allowEmpty = True if v[-1] is None else False
             
             if not allowEmpty and len(data[dataK]) == 0:
-                raise ValidationError('List named %s may not be empty' % k)
+                raise ValidationError("List named '%s' may not be empty" % k)
             map(lambda value: _validateValue(value, schema[k][0]), data[dataK])
         elif isinstance(v, tuple):
             _validateValue(data[dataK], schema[k])
 
+    return True
 # vim:et:fdm=indent:fdn=1
