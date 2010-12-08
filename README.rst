@@ -70,4 +70,4 @@ Syntax
 A full explanation of syntax will be put here whenever I have the motivation to do more documentation.  I'll add some notes here that aren't covered in the examples:
 	- Lists must be homogenous; the same validation will be applied to every element of the list.
 	- By default, lists are not allowed to be empty.  Add 'None' as the last parameter of the [] part of the schema if you allow empty lists.
-	- This version only supports dictionaries at the root level (hopefully explaining why all the examples were "{ 'one' : ____ }".  The API this was geing designed for didn't require any non-dictionary types, but I hope to add this soon.  
+	- This version only supports dictionaries at the root level (hopefully explaining why all the examples were "{ 'one' : ____ }".  The API this was designed for didn't require any non-dictionary types, but I hope to add this soon.  
