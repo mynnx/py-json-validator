@@ -9,7 +9,7 @@ Try some examples!
 Examples
 ========
 
-Dictionary with a required key 'one', which must be a string::
+Dictionary with a required key 'one', which must be a boolean::
 
 	>>> schema = { 'one' : (bool, ) }
 	>>> json_data = { 'one' : True }
